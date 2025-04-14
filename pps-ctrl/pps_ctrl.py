@@ -7,9 +7,6 @@ from diffusers.models.unets.unet_2d_blocks import get_down_block
 
 
 class PPSControlNetOutput(BaseOutput):
-    """
-    Modified output to include reconstructed conditioning.
-    """
     down_block_res_samples: tuple
     mid_block_res_sample: torch.Tensor
     reconstructed_conditioning: torch.Tensor
@@ -39,13 +36,10 @@ class ControlNetConditioningDecoding(nn.Module):
 
 
 class PPSControlNet(ControlNetModel):
-    """
-    Modified ControlNetModel with additional decoding and custom behavior.
-    """
 
     def __init__(self, *args, decoder: bool = True, **kwargs):
         super().__init__(*args, **kwargs)
-        self.decoder = decoder  # Custom attribute
+        self.decoder = decoder
 
         if self.decoder:
             self.controlnet_cond_decoding = ControlNetConditioningDecoding(
@@ -56,9 +50,6 @@ class PPSControlNet(ControlNetModel):
 
     def forward(self, sample: torch.Tensor, timestep: torch.Tensor, encoder_hidden_states: torch.Tensor, 
                 controlnet_cond: torch.Tensor, conditioning_scale: float = 1.0, return_dict: bool = True, **kwargs):
-        """
-        Custom forward function with additional reconstruction handling.
-        """
 
         # Run the original ControlNet forward pass
         controlnet_output = super().forward(sample, timestep, encoder_hidden_states, controlnet_cond, conditioning_scale, return_dict=False)
@@ -79,8 +70,5 @@ class PPSControlNet(ControlNetModel):
 
     @classmethod
     def from_pretrained_controlnet(cls, model_name: str, **kwargs):
-        """
-        Load from a pretrained ControlNet model and apply modifications.
-        """
         base_model = ControlNetModel.from_pretrained(model_name, **kwargs)
         return cls(**base_model.config)
