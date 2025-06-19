@@ -1,6 +1,6 @@
 # PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation
 
-🚧 **This repository is under construction. Check back soon for updates!** 🚧
+🚧 **This repository is currently under construction, and we are continually developing and refining the method. Check back soon for updates!** 🚧
 
 🚧 **We will provide updated complete version of code and checkpoints upon paper acceptance** 🚧
 
