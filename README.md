@@ -4,7 +4,7 @@
 
 🚧 **We will provide updated complete version of code and checkpoints upon paper acceptance** 🚧
 
-This repository contains the code and models for our paper:
+This repository contains the psudocode for our paper:
 
 > **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation**  
 
@@ -44,35 +44,18 @@ python utils/compute_pps.py --depth_dir path/to/depth --output_dir path/to/pps
 
 ### 3. Train
 
-#### Stage 1: Fine-tune Stable Diffusion
-
-```bash
-bash scripts/train_sd.sh
-```
-
-#### Stage 2: Train ControlNet with PPS conditioning
-
-```bash
-bash scripts/train_controlnet.sh
-```
-
-### 4. Inference
-
-```bash
-python scripts/infer.py --depth path/to/test/depth --output path/to/save
-```
-
-## Pretrained Models
-We provide pretrained checkpoints for:
-
-Stable Diffusion (domain-finetuned)
-
-ControlNet with PPS-encoder-decoder
-
-📥 Download links coming soon!
+We provide the partial pseudo-code for the paper in the repository.
 
 ## Citation
 
+```bash
+@article{xiong2025pps,
+  title={PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation},
+  author={Xiong, Xinqi and Beltran, Andrea Dunn and Choi, Jun Myeong and Niethammer, Marc and Sengupta, Roni},
+  journal={arXiv preprint arXiv:2504.17067},
+  year={2025}
+}
+```
 
 ## Acknowledgments
 
