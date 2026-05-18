@@ -804,8 +804,8 @@ class SimCol_Dataset(Dataset):
         self.condition = condition
         self.data_dir = data_dir
         self.tokenizer = tokenizer
-        self.PPS_dir = "/playpen-nas-ssd3/anaxxq/dataset/SimCol"
-        self.depth_dir = "/playpen-nas-ssd3/anaxxq/dataset/SimCol"
+        self.PPS_dir = ""
+        self.depth_dir = ""
 
         if mode in ('Train', 'Val'):
             with open(list, 'r') as f:
@@ -1205,7 +1205,7 @@ def main(args):
     #     args.pretrained_model_name_or_path, subfolder="unet", revision=args.revision, variant=args.variant
     # )
     
-    finetuned_unet_path = "/playpen-nas-ssd3/anaxxq/diffusers/examples/text_to_image/sd21_768_simcol_c3vd_Mar11_2e-6/checkpoint-10000"
+    finetuned_unet_path = ""
     unet = UNet2DConditionModel.from_pretrained(
         finetuned_unet_path, subfolder="unet", revision=args.revision, variant=args.variant
     )
@@ -1323,15 +1323,15 @@ def main(args):
     # train_dataset = make_train_dataset(args, tokenizer, accelerator)
 
     # train_dataset = C3VD_Dataset(
-    #     data_dir='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/C3VD_registered_videos_undistorted_V3',
-    #     list='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/C3VD_registered_videos_undistorted_V3/train.txt',
+    #     data_dir='',
+    #     list='',
     #     mode="Train",
     #     tokenizer=tokenizer
     # )
 
     train_dataset = SimCol_Dataset(
-        data_dir='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/SimCol3D_TANDEM_Format',
-        list='/playpen-nas-ssd3/anaxxq/PPSNet/SimCol_splits/train.txt',
+        data_dir='',
+        list='',
         mode="Train",
         condition="depth",
         # condition="PPS",
@@ -1347,15 +1347,15 @@ def main(args):
     )
 
     # val_dataset = C3VD_Dataset(
-    #     data_dir='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/C3VD_registered_videos_undistorted_V3',
-    #     list='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/C3VD_registered_videos_undistorted_V3/val.txt',
+    #     data_dir='',
+    #     list='',
     #     mode="Train",
     #     tokenizer=tokenizer
     # )
         
     val_dataset = SimCol_Dataset(
-        data_dir='/playpen-nas-ssd/akshay/3D_medical_vision/datasets/SimCol3D_TANDEM_Format',
-        list='/playpen-nas-ssd3/anaxxq/PPSNet/SimCol_splits/val.txt',
+        data_dir='',
+        list='',
         mode="Train",
         condition="depth",
         # condition="PPS",
