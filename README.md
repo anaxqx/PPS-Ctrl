@@ -1,20 +1,45 @@
 # PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation
 
-This repository accompanies the paper **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation** (arXiv:2504.17067). It contains an in-progress code release for a ControlNet-based image-translation method conditioned on per-pixel shading (PPS).
+**Code release in progress:** the repository includes a ControlNet training script and PPS modules; prepared data and project-specific run configuration are not included.
 
-> **Repository status:** This is not currently a complete, ready-to-run reproduction package. The repository does not include a populated dependency manifest, data preparation guide, pretrained checkpoints, or a verified end-to-end command. The paper describes the method; the code here is a partial implementation.
+This repository contains code for our paper:
 
-## What is in the repository
+> **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation**
 
-- `train_controlnet.py`: a ControlNet training script adapted from the Diffusers example. It expects model and dataset configuration through command-line arguments; the repository does not provide a project-specific launch command or prepared dataset.
-- `pps-ctrl/pps_ctrl.py` and `pps-ctrl/pps_ctrl_pipeline.py`: PPS ControlNet and pipeline code.
-- `utils/compute_pps.py`: utilities for deriving PPS values from depth maps. Its current script entry point uses hard-coded local paths and does not accept the `--depth_dir` or `--output_dir` options shown in older instructions.
+## Overview
 
-## Data and setup
+**PPS-Ctrl** is an image translation framework that combines **Stable Diffusion** and **ControlNet**, guided by a **Per-Pixel Shading (PPS)** map — a physics-informed representation capturing surface-light interactions. Unlike prior sim-to-real approaches that condition on depth maps, PPS provides a more faithful and geometrically consistent structural prior, enabling better texture realism and structure preservation in endoscopy image translation.
 
-The paper uses the [SimCol3D](https://www.ucl.ac.uk/interventional-surgical-sciences/simcol3d-3d-reconstruction-during-colonoscopy-challenge), [C3VD](https://durrlab.github.io/C3VD/), and [Colon10K](https://endoscopography.web.unc.edu/place-recognition-in-colonoscopy/) datasets. This repository does not bundle those datasets or provide a complete staging/preprocessing workflow.
+---
 
-No working environment setup command is provided yet. In particular, the repository currently has an empty, misspelled `requriments.txt` file rather than a populated `requirements.txt`. Dependencies and dataset paths must be configured for your environment before attempting to run the code.
+## Getting Started
+
+### 1. Environment Setup
+
+We recommend Python 3.9 with PyTorch ≥ 2.0 and the HuggingFace `diffusers` library.
+
+```bash
+conda create -n ppsctrl python=3.9
+conda activate ppsctrl
+```
+
+The repository does not currently include a populated dependency file; install the required packages for your environment.
+
+### 2. Prepare Data
+
+Download the following datasets:
+
+[SimCol3D](https://www.ucl.ac.uk/interventional-surgical-sciences/simcol3d-3d-reconstruction-during-colonoscopy-challenge)
+
+[C3VD](https://durrlab.github.io/C3VD/)
+
+[Colon10K](https://endoscopography.web.unc.edu/place-recognition-in-colonoscopy/)
+
+Precompute PPS maps with `utils/compute_pps.py`. The script currently uses hard-coded input and output paths, which must be set in the script before use.
+
+### 3. Train
+
+The training entry point is `train_controlnet.py`. Configure the model and dataset arguments for your run; a project-specific launch command is not currently provided.
 
 ## Citation
 
@@ -29,4 +54,4 @@ No working environment setup command is provided yet. In particular, the reposit
 
 ## Acknowledgments
 
-This work builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion), [ControlNet](https://github.com/lllyasviel/ControlNet), [Hugging Face Diffusers](https://github.com/huggingface/diffusers), and [PPSNet](https://github.com/yahskapar/PPSNet/tree/main). We thank their maintainers for their open-source contributions.
+This work builds on [Stable Diffusion](https://github.com/CompVis/stable-diffusion), [ControlNet](https://github.com/lllyasviel/ControlNet), [Hugging Face Diffusers](https://github.com/huggingface/diffusers) and [PPSNet](https://github.com/yahskapar/PPSNet/tree/main). We thank the maintainers for their open-source contributions.
