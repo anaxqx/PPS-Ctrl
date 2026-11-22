@@ -1,17 +1,10 @@
 # PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation
 
-🚧 **This repository is currently under construction, and we are continually developing and refining the method. Check back soon for updates!** 🚧
-
-🚧 **We will provide updated complete version of code and checkpoints upon paper acceptance** 🚧
-
-This repository contains the psudocode for our paper:
-
-> **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation**  
+This repository contains the ControlNet training script and per-pixel shading modules for [PPS-Ctrl](https://arxiv.org/abs/2504.17067). The code release is in progress.
 
 ## Overview
 
-**PPS-Ctrl** is a image translation framework that combines **Stable Diffusion** and **ControlNet**, guided by a **Per-Pixel Shading (PPS)** map — a physics-informed representation capturing surface-light interactions. Unlike prior sim-to-real approaches that condition on depth maps, PPS provides a more faithful and geometrically consistent structural prior, enabling better texture realism and structure preservation in endoscopy image translation.
-
+**PPS-Ctrl** is an image translation framework that combines **Stable Diffusion** and **ControlNet**, guided by a **Per-Pixel Shading (PPS)** map — a physics-informed representation capturing surface-light interactions. Unlike prior sim-to-real approaches that condition on depth maps, PPS provides a more faithful and geometrically consistent structural prior, enabling better texture realism and structure preservation in endoscopy image translation.
 
 ---
 
@@ -24,8 +17,8 @@ We recommend Python 3.9 with PyTorch ≥ 2.0 and the HuggingFace `diffusers` lib
 ```bash
 conda create -n ppsctrl python=3.9
 conda activate ppsctrl
-pip install -r requirements.txt
 ```
+
 ### 2. Prepare Data
 
 Download the following datasets:
@@ -36,19 +29,15 @@ Download the following datasets:
 
 [Colon10K](https://endoscopography.web.unc.edu/place-recognition-in-colonoscopy/)
 
-Precompute PPS maps:
-
-```bash
-python utils/compute_pps.py --depth_dir path/to/depth --output_dir path/to/pps
-```
+Set `input_dir` and `output_dir` in `utils/compute_pps.py`, then run `python utils/compute_pps.py` to compute PPS maps.
 
 ### 3. Train
 
-We provide the partial pseudo-code for the paper in the repository.
+For `train_controlnet.py`, set `--pretrained_model_name_or_path` and pass your dataset with `--dataset_name` or `--train_data_dir`. Use `--image_column`, `--conditioning_image_column`, and `--caption_column` to match the columns for target images, PPS maps, and captions.
 
 ## Citation
 
-```bash
+```bibtex
 @article{xiong2025pps,
   title={PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation},
   author={Xiong, Xinqi and Beltran, Andrea Dunn and Choi, Jun Myeong and Niethammer, Marc and Sengupta, Roni},
