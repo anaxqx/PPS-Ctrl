@@ -2,7 +2,7 @@
 
 This repository accompanies the paper **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation** (arXiv:2504.17067). It contains an in-progress code release for a ControlNet-based image-translation method conditioned on per-pixel shading (PPS).
 
-> **Repository status:** This is not currently a complete, ready-to-run reproduction package. The repository does not include a dependency manifest, data preparation guide, pretrained checkpoints, or a verified end-to-end command. The paper describes the method; the code here is a partial implementation.
+> **Repository status:** This is not currently a complete, ready-to-run reproduction package. The repository does not include a populated dependency manifest, data preparation guide, pretrained checkpoints, or a verified end-to-end command. The paper describes the method; the code here is a partial implementation.
 
 ## What is in the repository
 
