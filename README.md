@@ -1,10 +1,6 @@
 # PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation
 
-**Code release in progress:** the repository includes a ControlNet training script and PPS modules; prepared data and project-specific run configuration are not included.
-
-This repository contains code for our paper:
-
-> **PPS-Ctrl: Controllable Sim-to-Real Translation for Colonoscopy Depth Estimation**
+This repository contains the ControlNet training script and per-pixel shading modules for [PPS-Ctrl](https://arxiv.org/abs/2504.17067). The code release is in progress.
 
 ## Overview
 
@@ -23,8 +19,6 @@ conda create -n ppsctrl python=3.9
 conda activate ppsctrl
 ```
 
-The repository does not currently include a populated dependency file; install the required packages for your environment.
-
 ### 2. Prepare Data
 
 Download the following datasets:
@@ -35,11 +29,11 @@ Download the following datasets:
 
 [Colon10K](https://endoscopography.web.unc.edu/place-recognition-in-colonoscopy/)
 
-Precompute PPS maps with `utils/compute_pps.py`. The script currently uses hard-coded input and output paths, which must be set in the script before use.
+Set `input_dir` and `output_dir` in `utils/compute_pps.py`, then run `python utils/compute_pps.py` to compute PPS maps.
 
 ### 3. Train
 
-The training entry point is `train_controlnet.py`. Configure the model and dataset arguments for your run; a project-specific launch command is not currently provided.
+For `train_controlnet.py`, set `--pretrained_model_name_or_path` and pass your dataset with `--dataset_name` or `--train_data_dir`. Use `--image_column`, `--conditioning_image_column`, and `--caption_column` to match the columns for target images, PPS maps, and captions.
 
 ## Citation
 
